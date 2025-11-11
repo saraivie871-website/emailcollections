@@ -1,0 +1,65 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sara’s Websites and Phone Apps</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+        }
+        .box {
+            margin: 10px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            width: 300px;
+            text-align: center;
+        }
+        button {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Sara’s Websites and Phone Apps</h1>
+    <div class="box">
+        <label for="firstName">First Name</label>
+        <input type="text" id="firstName" required>
+    </div>
+    <div class="box">
+        <label for="email">Email</label>
+        <input type="email" id="email" required>
+    </div>
+    <button onclick="sendEmail()">Send</button>
+    <p>The website code will be sent to your email address</p>
+
+    <script>
+        function sendEmail() {
+            const firstName = document.getElementById('firstName').value;
+            const email = document.getElementById('email').value;
+
+            fetch('/send-email', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ firstName, email }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert('Email sent successfully!');
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
+</body>
+</html>
